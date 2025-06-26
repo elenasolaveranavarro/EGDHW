@@ -2,7 +2,7 @@
 % Please edit documentation in R/proportionalAllocation.R
 \name{proportionalAllocation}
 \alias{proportionalAllocation}
-\title{Proportional allocation}
+\title{Proportional Allocation}
 \usage{
 proportionalAllocation(x, macro_value, weight, data)
 }
@@ -14,17 +14,7 @@ If NA, the function returns normalized shares (proportions summing to 1)}
 
 \item{weight:}{Survey weight variable}
 
-\item{data:}{Data frame containing the micro data
-
-The function groups data for each implicate. Then, it:
-\enumerate{
-\item Calculates the weighted total of the microdata variable
-\item Scales each observation proportionally so the weighted total matches the macro
-target, preserving the relative distribution of the original microdata
-}
-
-The notation .x and .w in dplyr creates new columns in the dataframe with the
-names from those objects}
+\item{data:}{Data frame containing the micro data}
 }
 \value{
 scaled data for each multiple imputation
@@ -32,4 +22,15 @@ scaled data for each multiple imputation
 \description{
 Adjusts microdata values to align with macroeconomic totals using proportional
 scaling within each multiple imputation.
+
+The function groups data for each implicate. Then, it:
+\enumerate{
+\item Calculates the weighted total of the microdata variable
+\item Scales each observation proportionally so the weighted total matches the macro
+target, preserving the relative distribution of the original microdata
+}
+}
+\details{
+The notation .x and .w in dplyr creates new columns in the dataframe with the
+names from those objects
 }

@@ -1,4 +1,4 @@
-#' Matching
+#' Matching micro-macro variables
 #'
 #' Computes coverage ratios and Gini coefficients across multiple imputations.
 #'

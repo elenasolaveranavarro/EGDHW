@@ -2,7 +2,7 @@
 % Please edit documentation in R/matching.R
 \name{matching}
 \alias{matching}
-\title{Matching}
+\title{Matching micro-macro variables}
 \usage{
 matching(micro, weight, macro, stage)
 }
