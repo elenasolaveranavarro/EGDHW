@@ -1,9 +1,9 @@
 Package: centralisedapproach
-Title: What the Package Does (One Line, Title Case)
+Title: OECD centralised appraoch for distributional wealth estimation
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: This package contains the functions used in the OECD centralised approach. They combine microdata with national accounts data for a given country and year, in order to construct distributional household wealth estimates. The group of interest, e.g. deciles or percentiles, can be customised.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
