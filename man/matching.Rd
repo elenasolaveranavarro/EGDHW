@@ -2,7 +2,7 @@
 % Please edit documentation in R/matching.R
 \name{matching}
 \alias{matching}
-\title{Computes coverage ratios and Gini coefficients across multiple imputations.}
+\title{Matching}
 \usage{
 matching(micro, weight, macro, stage)
 }
