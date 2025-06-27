@@ -73,9 +73,8 @@ up-to-date. `devtools::build_readme()` is handy for this.
 ## Step 3: Visualization
 
 The `centralisedapproach` package also allwos users to create plots with
-the main results from the distirbutional exercise.
-
-To begin with, the LWS results must be saved your local repository as a
-csv file, so that the functions can import the relevant data.
+the main results from the distirbutional exercise. LWS results must be
+saved your local repository as a csv file, so that the functions can
+import the relevant data.
 
 <img src="man/figures/README-pressure-1.png" width="100%" />

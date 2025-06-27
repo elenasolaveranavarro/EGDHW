@@ -72,9 +72,7 @@ You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-da
 
 ## Step 3: Visualization
 
-The `centralisedapproach` package also allwos users to create plots with the main results from the distirbutional exercise. 
-
-To begin with, the LWS results must be saved your local repository as a csv file, so that the functions can import the relevant data.
+The `centralisedapproach` package also allwos users to create plots with the main results from the distirbutional exercise. LWS results must be saved your local repository as a csv file, so that the functions can import the relevant data.
 
 ```{r pressure, echo = FALSE}
 plot(pressure)
