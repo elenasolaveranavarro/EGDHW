@@ -21,15 +21,6 @@ You can install the development version of centralisedapproach from
 # install.packages("devtools") #install devtools if not installed
 library(devtools)
 devtools::install_github("elenasolaveranavarro/EGDHW")
-#> ── R CMD build ─────────────────────────────────────────────────────────────────
-#>       ✔  checking for file 'C:\Users\Sola-veranavarro_E\AppData\Local\Temp\RtmpwnXDQM\remotes51b86d214010\elenasolaveranavarro-EGDHW-ce6b7a7/DESCRIPTION'
-#>       ─  preparing 'centralisedapproach':
-#>    checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   ✔  checking DESCRIPTION meta-information
-#>       ─  checking for LF line-endings in source and make files and shell scripts
-#>   ─  checking for empty or unneeded directories
-#>       ─  building 'centralisedapproach_0.0.0.9000.tar.gz'
-#>      
-#> 
 ```
 
 ## Step 1: importing national accounts data

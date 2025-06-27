@@ -24,7 +24,7 @@ The goal of centralisedapproach is to provide the tools to produce distributiona
 
 You can install the development version of centralisedapproach from [GitHub](https://github.com/) with:
 
-``` {r installation, message = FALSE}
+``` {r installation, message = FALSE, results = "hide"}
 # install.packages("devtools") #install devtools if not installed
 library(devtools)
 devtools::install_github("elenasolaveranavarro/EGDHW")
