@@ -10,36 +10,50 @@
 #' @param x Variable of interest for which to calculate decile statistics
 #' @param ord Ordering variable used to rank observations.
 #' @param weight Survey weight variable
-#' @param data Data frame containing the survey data
-#' @param breakdown Numeric vector defining percentile breaks. Default creates deciles
+#' @param xUp Upper bound of the Cumulative Distribution Function for a given group. It begins at 0
+#' @param xLow Lower bound of the Cumulative Distirbution Function for a given group. It ends at 1 and should be in the range [xUp, 1]
+#' @param data Data frame containing the microdata
+#' @param imp Survey variable indicating the implicate number from multiple imputation. If not specified, default sets to 1
 #'
 #' @return a list: total micro value by percentile, relative share owned by each group,
 #' and number of households in each percentile
 #'
 #' @export
 
-percentiles <- function(x, ord, weight, xUp, xLow, data) {
+
+percentiles <- function(x, ord, weight, xUp, xLow, data, imp) {
+
   if (xLow < xUp) {
-    print("xUp is the upper bound of the CDF, meaning it begins at 0.
-          xLow should therefore be in the range [xUp,1].
-          The values have been swapped.")
+    message("xUp is the upper bound of the CDF, meaning it begins at 0.
+            xLow should therefore be in the range [xUp,1].
+            The values have been swapped.")
     temp <- xLow
     xLow <- xUp
     xUp <- temp
   }
 
-  # Make a dataframe of observations for each implicate
-  results <- data %>%
-    mutate(.x = {{x}}, .ord = {{ord}}, .wgt = {{weight}}) %>%
-    dplyr::select(inum, .x, .ord, .wgt) %>%
-    group_by(inum) %>%
-    dplyr::group_modify(~ {
-      df <- .x %>% arrange(desc(.ord))
-      sumW <- sum(df$.wgt, na.rm = TRUE) # store total weights
-      df$wPercentile <- df$.wgt / sumW
-      df$wPercentileShare <- cumsum(df$wPercentile)
+  # Check imp parameter. If the user does not specify a multiple imputation variable,
+  # we assume that there is only one implicate.
+  if (missing(imp)) {
+    message("Multiple imputation variable not selected, default set to one implicate")
+    data <- data %>%
+      mutate(.x = {{x}}, .ord = {{ord}}, .wgt = {{weight}}, .imp = 1)
+  } else {
+    data <- data %>%
+      mutate(.x = {{x}}, .ord = {{ord}}, .wgt = {{weight}}, .imp = {{imp}})
+  }
 
-      # Make dataframe of the percentile of interest
+  # Cumulative weight percentiles for each implicate
+  results <- data %>%
+    dplyr::select(.imp, .x, .ord, .wgt) %>%
+    dplyr::group_by(.imp) %>%
+    dplyr::group_modify(~ {
+      df <- .x %>% arrange(desc(.ord)) # ranking by ordering variable
+      sumW <- sum(df$.wgt, na.rm = TRUE) # store total weights
+      df$wPercentile <- df$.wgt / sumW # share of total weights
+      df$wPercentileShare <- cumsum(df$wPercentile) # share of total weights
+
+      # Make dataframe of the percentile of interest for each implicate
       Upp <- if (xUp <= min(df$wPercentileShare)) 1 else
         which.min(abs(df$wPercentileShare - xUp))
       Low <- if (xLow >= max(df$wPercentileShare)) nrow(df) else
@@ -60,6 +74,6 @@ percentiles <- function(x, ord, weight, xUp, xLow, data) {
     dplyr::summarise(total = mean(total_dec), micro = mean(total_micro),
                      nhh = mean(wgt), share = mean(shares_dec), .groups = "drop")
 
-  return(list("total" = results$total, "share" = results$share, "household" = results$nhh))
+  return(list("total" = results$total, "share" = results$share,
+              "household" = results$nhh))
 }
-
